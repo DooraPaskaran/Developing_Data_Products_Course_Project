@@ -1,0 +1,81 @@
+---
+title: "FatherSonDataset"
+author: "Dooratharsini Paskaran"
+date: '2022-06-21'
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+## Exploratory Data Analysis
+
+- This is an R Markdown presentation created as a part of Coursera DataScience Specialization : Developing Data Products Course.
+
+- Selected father son Data set from "UsingR" Package. 
+
+- The dataset contains height of 1078 fathers and their corresponding sons in inches. 
+
+- A data set contains 1078 observations on following 2 variables.
+
+fheight - Father's height in inches
+
+sheight - Son's height in inches
+
+```{r, echo=FALSE,results='hide',warning=FALSE,message=FALSE}
+library(UsingR)
+data(father.son)
+
+```
+
+```{r}
+str(father.son)
+```
+
+```{r}
+head(father.son)
+```
+
+- Few lines from data set
+
+## Liner Model
+
+- There seems to be an association between heights of fathers and those of sons. 
+
+- As you can see, as the height of father increases, those of son also increase. The strength of the association is calculated through correlation.
+
+```{r, echo=TRUE}
+cor(father.son)
+```
+
+- Analysis will establish a linear relation between height of father and son.
+
+- Through a linear regression model, the height of son is predicted by height of father's.
+
+## Building linear model and Prediction
+### Building Model
+```{r, echo=FALSE}
+fit <- lm(father.son$sheight~father.son$fheight)
+```
+```{r, echo=TRUE}
+summary(fit)
+```
+ 
+### Prediction
+
+- Linear relationship is established between height of father and son. 
+- Using the equation, height of the sons can be predicted by the height of their fathers. 
+
+
+## Plot
+
+```{r}
+plot(father.son$fheight, father.son$sheight, xlab = "Father's Height", ylab = "Son's Height")
+abline(fit,lwd=2,col="blue")
+title(main="Height of father's Vs. Height of son's")
+```
+
+Height of the fathers and sons are associated positively with each other. As the height of father increases,those of sons also increase.
